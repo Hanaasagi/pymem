@@ -1,0 +1,31 @@
+from ps_mem import get_memory_usage
+
+from .utils import human
+
+from typing import Dict
+
+
+def get_summary(pid: int) -> Dict[str, str]:
+    """
+    Get process memory usage summary by pid.
+    >>> get_summary(pid=32554)
+    {
+        "private": "17.56 MiB",
+        "shared": "1.23 MiB",
+        "total": "18.79 MiB",
+        "swap": "0.00 MiB"
+    }
+    """
+    summary = {}
+    sorted_cmds, shareds, count, total, swaps, total_swap = get_memory_usage(
+        [pid], False, False
+    )
+    cmd = sorted_cmds[0]
+    summary["private"] = human(cmd[1] - shareds[cmd[0]], include_unit=True)
+    summary["shared"] = human(shareds[cmd[0]], include_unit=True)
+    summary["total"] = human(cmd[1], include_unit=True)
+    summary["swap"] = human(swaps[cmd[0]], include_unit=True)
+    return summary
+
+
+__all__ = ["get_summary"]
