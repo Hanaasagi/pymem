@@ -30,7 +30,7 @@ class BaseDebugger:
     def verbose(self) -> bool:
         return self._verbose
 
-    def _format_command(self, debug_code: bytes) -> List[str]:
+    def _format_command(self, debug_code: str) -> List[str]:
         raise NotImplementedError()
 
     def debug_with(self, debug_code: str) -> Dict[Any, Any]:
