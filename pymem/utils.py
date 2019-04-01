@@ -20,11 +20,7 @@ def human(
     '1048576.00'
     """
     units = ["B", "KiB", "MiB", "GiB", "TiB"]
-    try:
-        diff = units.index(dst_unit) - units.index(src_unit)
-    except IndexError:
-        # TODO
-        pass
+    diff = units.index(dst_unit) - units.index(src_unit)
     for _ in range(abs(diff)):
         if diff < 0:
             num = num * 1024.0
