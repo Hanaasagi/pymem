@@ -1,0 +1,21 @@
+dist: xenial
+language: python
+python:
+  - "3.6"
+  - "3.7"
+  - "nightly"
+install:
+  - pip install -r requirements.txt
+  - pip install -r requirements-dev.txt
+  - pip install -r requirements-test.txt
+script:
+  - flake8 pymem
+  - mypy pymem
+  - isort -c -rc pymem
+  - pytest
+matrix:
+  allow_failures:
+  - python: "nightly"
+notifications:
+  on_success: change
+  on_failure: always
