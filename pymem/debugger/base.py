@@ -40,7 +40,9 @@ class BaseDebugger:
             [f'f = open("{tmp_path}", "w")', debug_code, r"f.close()"]
         )
 
-        command = self._format_command(base64.b64encode(debug_code.encode()))
+        command = self._format_command(
+            base64.b64encode(debug_code.encode()).decode()
+        )
         process = subprocess.Popen(
             command, stdout=subprocess.PIPE, stderr=subprocess.PIPE
         )
@@ -49,7 +51,6 @@ class BaseDebugger:
             sys.stderr.write(f"Standard Output:\n{stdout}\n")
             sys.stderr.write(f"Standard Error:\n{stderr}\n")
             sys.stderr.flush()
-
         info = io.StringIO()
         for chunk in iter(functools.partial(os.read, tmp_fd, 1024), b""):
             info.write(chunk.decode())
