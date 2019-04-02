@@ -1,4 +1,4 @@
-from pymem.summary import get_summary
+from pymem.api import get_summary
 from multiprocessing import Process, Event
 
 

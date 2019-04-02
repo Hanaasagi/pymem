@@ -1,8 +1,23 @@
+import pkg_resources
 from ps_mem import get_memory_usage
 
 from .utils import human
+from .debugger import BaseDebugger
 
+from typing import Any
 from typing import Dict
+
+
+def get_objects(debugger: BaseDebugger) -> Dict[Any, Any]:
+    """Get process objects."""
+    code = pkg_resources.resource_string(__name__, "snippets/objects.py")
+    return debugger.debug_with(code.decode())
+
+
+def get_garbages(debugger: BaseDebugger) -> Dict[Any, Any]:
+    """Get process garbages."""
+    code = pkg_resources.resource_string(__name__, "snippets/garbages.py")
+    return debugger.debug_with(code.decode())
 
 
 def get_summary(pid: int) -> Dict[str, str]:

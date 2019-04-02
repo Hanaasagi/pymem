@@ -3,27 +3,16 @@ import json
 import distutils.spawn
 
 import click
-import pkg_resources
 
+from .api import get_objects
+from .api import get_summary
+from .api import get_garbages
 from .utils import check_process_exist
-from .summary import get_summary
 from .debugger import GDBDebugger
 from .debugger import BaseDebugger
 from .debugger import LLDBDebugger
 
-from typing import Any
-from typing import Dict
 from typing import Type
-
-
-def get_objects(debugger: BaseDebugger) -> Dict[Any, Any]:
-    code = pkg_resources.resource_string(__name__, "snippets/objects.py")
-    return debugger.debug_with(code.decode())
-
-
-def get_garbages(debugger: BaseDebugger) -> Dict[Any, Any]:
-    code = pkg_resources.resource_string(__name__, "snippets/garbages.py")
-    return debugger.debug_with(code.decode())
 
 
 @click.command()
