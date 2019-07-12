@@ -17,5 +17,6 @@ class LLDBDebugger(BaseDebugger):
             r"expr (void) PyGILState_Release($gil)",
         ]
         arguments = ["-p", str(self.target_pid), "--batch"]
-        arguments.extend(f"--one-line={command}" for command in lldb_commands)
+        for command in lldb_commands:
+            arguments.extend(['--one-line', command])
         return [self.bin_path] + arguments

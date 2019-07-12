@@ -48,9 +48,12 @@ def test_LLDBDebugger_format_command():
         "-p",
         "1",
         "--batch",
-        "--one-line=expr void * $gil = (void *) PyGILState_Ensure()",
-        '--one-line=expr (void) PyRun_SimpleString("import base64;exec(base64.b64decode(\\\'f.write(\'{"status": "OK"}\')\\\').decode());")',
-        "--one-line=expr (void) PyGILState_Release($gil)",
+        "--one-line",
+        "expr void * $gil = (void *) PyGILState_Ensure()",
+        "--one-line",
+        'expr (void) PyRun_SimpleString("import base64;exec(base64.b64decode(\\\'f.write(\'{"status": "OK"}\')\\\').decode());")',
+        "--one-line",
+        "expr (void) PyGILState_Release($gil)",
     ]
 
 
