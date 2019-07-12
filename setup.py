@@ -37,7 +37,7 @@ setup(
     [console_scripts]
     pymem=pymem.cli:main
     """,
-    install_requires=["click>=5.1,<6.0"],
+    install_requires=requirements,
     setup_requires=["setuptools>=38.6.0"],
     platforms=["linux", "darwin"],
     classifiers=[
