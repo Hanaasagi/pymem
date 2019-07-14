@@ -4,6 +4,7 @@ import distutils.spawn
 
 import click
 
+from . import __version__
 from .api import get_objects
 from .api import get_summary
 from .api import get_garbages
@@ -25,6 +26,11 @@ from typing import Type
     default="gdb",
 )
 @click.option("-v", "--verbose", default=False, is_flag=True)
+@click.version_option(
+    version=__version__,
+    prog_name="pymem-debugger",
+    message='%(prog)s version: %(version)s'
+)
 def main(pid: int, debugger_kind: str, verbose: bool) -> None:
     if not check_process_exist(pid):
         click.echo(f"Process(pid={pid}) is not found.", err=True)
