@@ -48,8 +48,8 @@ class BaseDebugger:
         )
         stdout, stderr = process.communicate()
         if self.verbose:
-            sys.stderr.write(f"Standard Output:\n{stdout}\n")
-            sys.stderr.write(f"Standard Error:\n{stderr}\n")
+            sys.stderr.write(f"Standard Output:\n{stdout.decode()}\n")
+            sys.stderr.write(f"Standard Error:\n{stderr.decode()}\n")
             sys.stderr.flush()
         info = io.StringIO()
         for chunk in iter(functools.partial(os.read, tmp_fd, 1024), b""):
