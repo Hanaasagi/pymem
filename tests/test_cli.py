@@ -50,18 +50,21 @@ def test_print(cli):
             ]
             with patch("pymem.cli.get_garbages") as mock_get_garbages:
                 mock_get_garbages.return_value = {"count": 0, "objects": []}
-                result = cli.invoke(main, [str(pid)])
-                # make sure subprocess exit, before throwing AssertionError.
-                e.set()
-                p.join()
-                assert result.exit_code == 0
-                data = json.loads(result.output)
-                assert data["objects"] == [
-                    {
-                        "type": "<class 'abc.ABCMeta'>",
-                        "objects": 91,
-                        "total_size": "88.88 KiB",
-                    }
-                ]
-                assert data["garbages"] == {"count": 0, "objects": []}
-                assert "summary" in data
+                with patch("pymem.cli.get_malloc_stats") as mock_get_malloc_stats:
+                    mock_get_malloc_stats.return_value = {"arenas_allocated_total": 1048}
+                    result = cli.invoke(main, [str(pid)])
+                    # make sure subprocess exit, before throwing AssertionError.
+                    e.set()
+                    p.join()
+                    assert result.exit_code == 0
+                    data = json.loads(result.output)
+                    assert data["objects"] == [
+                        {
+                            "type": "<class 'abc.ABCMeta'>",
+                            "objects": 91,
+                            "total_size": "88.88 KiB",
+                        }
+                    ]
+                    assert data["garbages"] == {"count": 0, "objects": []}
+                    assert "summary" in data
+                    assert data["malloc_stats"] == {"arenas_allocated_total": 1048}
