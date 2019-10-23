@@ -8,7 +8,7 @@ def human(
     *,
     src_unit: str = "KiB",
     dst_unit: str = "MiB",
-    include_unit: bool = False
+    include_unit: bool = False,
 ) -> str:
     """
     Convert num from source unit to target unit.

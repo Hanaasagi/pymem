@@ -29,7 +29,7 @@ from typing import Type
 @click.version_option(
     version=__version__,
     prog_name="pymem-debugger",
-    message='%(prog)s version: %(version)s'
+    message="%(prog)s version: %(version)s",
 )
 def main(pid: int, debugger_kind: str, verbose: bool) -> None:
     if not check_process_exist(pid):

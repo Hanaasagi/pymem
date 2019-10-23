@@ -18,5 +18,5 @@ class LLDBDebugger(BaseDebugger):
         ]
         arguments = ["-p", str(self.target_pid), "--batch"]
         for command in lldb_commands:
-            arguments.extend(['--one-line', command])
+            arguments.extend(["--one-line", command])
         return [self.bin_path] + arguments
