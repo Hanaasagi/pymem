@@ -8,6 +8,7 @@ from . import __version__
 from .api import get_objects
 from .api import get_summary
 from .api import get_garbages
+from .api import get_malloc_stats
 from .utils import check_process_exist
 from .debugger import GDBDebugger
 from .debugger import BaseDebugger
@@ -55,6 +56,7 @@ def main(
     )
     data["objects"] = get_objects(debugger, objects_limit)
     data["garbages"] = get_garbages(debugger)
+    data["malloc_stats"] = get_malloc_stats(debugger)
     data["summary"] = get_summary(pid)
     output = json.dumps(data, indent=4)
 
