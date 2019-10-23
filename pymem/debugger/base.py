@@ -33,11 +33,16 @@ class BaseDebugger:
     def _format_command(self, debug_code: str) -> List[str]:
         raise NotImplementedError()
 
-    def debug_with(self, debug_code: str) -> Dict[Any, Any]:
+    def debug_with(self, debug_code: str, **kwargs: Any) -> Dict[Any, Any]:
         tmp_fd, tmp_path = tempfile.mkstemp()
         os.chmod(tmp_path, 0o777)
         debug_code = os.linesep.join(
-            [f'f = open("{tmp_path}", "w")', debug_code, r"f.close()"]
+            [
+                *[f"{name} = {value}" for name, value in kwargs.items()],
+                f'f = open("{tmp_path}", "w")',
+                debug_code,
+                r"f.close()",
+            ]
         )
 
         command = self._format_command(

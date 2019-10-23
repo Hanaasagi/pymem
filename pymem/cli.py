@@ -25,13 +25,16 @@ from typing import Type
     type=click.Choice(["gdb", "lldb"]),
     default="gdb",
 )
+@click.option("-l", "--limit", "objects_limit", type=click.INT, default=15)
 @click.option("-v", "--verbose", default=False, is_flag=True)
 @click.version_option(
     version=__version__,
     prog_name="pymem-debugger",
     message="%(prog)s version: %(version)s",
 )
-def main(pid: int, debugger_kind: str, verbose: bool) -> None:
+def main(
+    pid: int, debugger_kind: str, objects_limit: int, verbose: bool
+) -> None:
     if not check_process_exist(pid):
         click.echo(f"Process(pid={pid}) is not found.", err=True)
         click.get_current_context().exit(1)
@@ -50,7 +53,7 @@ def main(pid: int, debugger_kind: str, verbose: bool) -> None:
     debugger: BaseDebugger = debugger_cls(
         bin_path=debugger_bin_path, target_pid=pid, verbose=verbose
     )
-    data["objects"] = get_objects(debugger)
+    data["objects"] = get_objects(debugger, objects_limit)
     data["garbages"] = get_garbages(debugger)
     data["summary"] = get_summary(pid)
     output = json.dumps(data, indent=4)
