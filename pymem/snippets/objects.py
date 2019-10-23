@@ -114,11 +114,11 @@ def summarize(objects):
 
 
 def human(num, power="B"):
-    powers = ["B", "Ki", "Mi", "Gi", "Ti"]
+    powers = ["B", "KiB", "MiB", "GiB", "TiB"]
     while num >= 1024.0:
         num /= 1024.0
         power = powers[powers.index(power) + 1]
-    return "%.2f %sB" % (num, power)
+    return "%.2f %s" % (num, power)
 
 
 def format_(rows, limit=15, sort="size", order="descending"):
