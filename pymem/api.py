@@ -8,10 +8,10 @@ from typing import Any
 from typing import Dict
 
 
-def get_objects(debugger: BaseDebugger) -> Dict[Any, Any]:
+def get_objects(debugger: BaseDebugger, limit: int = 15) -> Dict[Any, Any]:
     """Get process objects."""
     code = pkg_resources.resource_string(__name__, "snippets/objects.py")
-    return debugger.debug_with(code.decode())
+    return debugger.debug_with(code.decode(), limit=limit)
 
 
 def get_garbages(debugger: BaseDebugger) -> Dict[Any, Any]:
