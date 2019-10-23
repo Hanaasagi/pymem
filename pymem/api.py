@@ -8,6 +8,12 @@ from typing import Any
 from typing import Dict
 
 
+def get_malloc_stats(debugger: BaseDebugger) -> Dict[Any, Any]:
+    """Get process malloc stats."""
+    code = pkg_resources.resource_string(__name__, "snippets/mallocstats.py")
+    return debugger.debug_with(code.decode())
+
+
 def get_objects(debugger: BaseDebugger, limit: int = 15) -> Dict[Any, Any]:
     """Get process objects."""
     code = pkg_resources.resource_string(__name__, "snippets/objects.py")
@@ -43,4 +49,4 @@ def get_summary(pid: int) -> Dict[str, str]:
     return summary
 
 
-__all__ = ["get_summary"]
+__all__ = ["get_malloc_stats", "get_objects", "get_garbages", "get_summary"]
