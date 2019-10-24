@@ -4,9 +4,6 @@ from sys import getsizeof
 from inspect import stack
 from inspect import isframe
 
-f = globals().get("f")
-limit = globals().get("limit")
-
 _Py_TPFLAGS_HAVE_GC = 1 << 14  # Py_TPFLAGS_HAVE_GC
 
 
@@ -162,8 +159,12 @@ def format_(rows, limit=15, sort="size", order="descending"):
     return rtn
 
 
-all_objects = get_objects()
-# f.write(str(gc.garbage))
-# f.write("\n")
-s = summarize(all_objects)
-json.dump(format_(s, limit=limit), f)
+def main():
+    f = globals().get("f")
+    limit = globals().get("limit")
+    all_objects = get_objects()
+    s = summarize(all_objects)
+    json.dump(format_(s, limit=limit), f)
+
+
+main()
