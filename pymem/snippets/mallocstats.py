@@ -5,7 +5,6 @@ import json
 import tempfile
 import contextlib
 
-f = globals().get("f")
 
 # sys._debugmallocstats print all message to C level stderr
 # contextlib.redirect_stderr is not working here
@@ -51,5 +50,10 @@ def get_malloc_stats():
     return result
 
 
-stats = get_malloc_stats()
-json.dump(stats, f)
+def main():
+    f = globals().get("f")
+    stats = get_malloc_stats()
+    json.dump(stats, f)
+
+
+main()
