@@ -31,19 +31,35 @@ $ sudo pymem [pid]
 {
     "objects": [
         {
+            "type": "<class 'list'>",
+            "count": 5797,
+            "total_size": "6.24 MiB"
+        },
+        {
             "type": "<class 'str'>",
-            "objects": 19380,
-            "total_size": "2.31 MiB"
+            "count": 26988,
+            "total_size": "3.21 MiB"
         }
     ],
     "garbages": {
         "count": 0,
         "objects": []
     },
+    "malloc_stats": {
+        "arenas_allocated_total": 1725,
+        "arenas_reclaimed": 1661,
+        "arenas_highwater_mark": 73,
+        "arenas_allocated_current": 64,
+        "bytes_in_allocated_blocks": 15942032,
+        "bytes_in_available_blocks": 127776,
+        "bytes_lost_to_pool_headers": 192528,
+        "bytes_lost_to_quantization": 166720,
+        "bytes_lost_to_arena_alignment": 0
+    },
     "summary": {
-        "private": "19.20 MiB",
-        "shared": "1.28 MiB",
-        "total": "20.48 MiB",
+        "private": "39.28 MiB",
+        "shared": "41.82 MiB",
+        "total": "81.10 MiB",
         "swap": "0.00 MiB"
     }
 }
