@@ -157,7 +157,7 @@ def format_(rows, limit=15, sort="size", order="descending"):
     rtn = []
     for row in localrows:
         rtn.append(
-            {"type": str(row[0]), "objects": row[1], "total_size": row[2]}
+            {"type": str(row[0]), "count": row[1], "total_size": row[2]}
         )
     return rtn
 

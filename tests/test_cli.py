@@ -44,7 +44,7 @@ def test_print(cli):
             mock_get_objects.return_value = [
                 {
                     "type": "<class 'abc.ABCMeta'>",
-                    "objects": 91,
+                    "count": 91,
                     "total_size": "88.88 KiB",
                 }
             ]
@@ -61,7 +61,7 @@ def test_print(cli):
                     assert data["objects"] == [
                         {
                             "type": "<class 'abc.ABCMeta'>",
-                            "objects": 91,
+                            "count": 91,
                             "total_size": "88.88 KiB",
                         }
                     ]
