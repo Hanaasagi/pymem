@@ -1,2 +1,3 @@
 Click==7.0
 ps-mem==3.12
+prettytable==0.7.2
