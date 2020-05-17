@@ -11,7 +11,7 @@ pymem is a tool to analysis your Python process.
 ### Install
 
 ```
-$ pip install git+https://github.com:Hanaasagi/pymem.git
+$ pip install git+https://github.com/Hanaasagi/pymem.git
 ```
 
 ### Usage
